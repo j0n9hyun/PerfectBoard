@@ -1,0 +1,80 @@
+@import './common.scss';
+
+.boardcontainer {
+  position: relative;
+  border: 5px solid gray;
+  max-width: 100vw;
+  height: 100vh;
+  box-shadow: 3px 3px 15px -5px rgba(0, 0, 0, 0.8);
+  transition: background 0.3s ease-out;
+}
+
+.articleTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 20px;
+  .articleTitleDesc {
+    margin-top: 10px;
+    font-size: 0.6em;
+    color: gray;
+  }
+  // @media screen and(max-width: 760px) {
+  //   font-size: 0.3rem;
+  // }
+}
+
+.articleList {
+  background: #fff;
+  table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid gray;
+    visibility: hidden;
+    transition: all 0.9s ease-out;
+    td {
+      margin-bottom: 500px;
+      font-size: 1.2em;
+      color: darkgrey;
+      font-weight: 600;
+      cursor: pointer;
+      padding-top: 10px;
+      &:hover {
+        font-weight: 600;
+        color: #000;
+      }
+    }
+    tr {
+      color: coral;
+    }
+    .test {
+      color: purple;
+      width: 80%;
+    }
+    &.active {
+      visibility: visible;
+      transition: all 0.2s ease-out;
+    }
+  }
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  // border: 1px solid red;
+  .pagination {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    color: coral;
+  }
+}
