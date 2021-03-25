@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
 
-const Pagination = ({ paginate, perPage, totalPosts }) => {
+const Pagination = ({ paginate, perPage, totalPosts, currentPage }) => {
   const pageNumber = [];
   for (let i = 1; i <= Math.ceil(totalPosts / perPage); i++) {
     pageNumber.push(i);
   }
+
+  // console.log(pageNumber);
   useEffect(() => {
-    let lists = document.querySelector('table');
-    document.addEventListener('click', function () {
-      lists.classList.add('active');
-    });
+    let lists = document.querySelectorAll('.pagination');
+    for (let i = 0; i < lists.length; ++i) {
+      if (currentPage - 1 === i) {
+        lists[i].classList.add('active');
+      } else {
+        lists[i].classList.remove('active');
+      }
+    }
   });
 
   return (

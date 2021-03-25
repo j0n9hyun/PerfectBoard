@@ -8,11 +8,12 @@ const BoardPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(20);
+  const [perPage, setPerPage] = useState(10);
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
   const date = new Date();
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     const postApi = async () => {
@@ -26,7 +27,6 @@ const BoardPage = () => {
     postApi();
   }, []);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
       <div className='boardcontainer'>
@@ -49,9 +49,9 @@ const BoardPage = () => {
                 <tr key={id}>
                   <td>{id}</td>
                   {/* <td onClick={onClick}>{title}</td> */}
-                  <td>
-                    <Link to={`/post/${id}`}>{title}</Link>
-                  </td>
+                  <Link to={`/post/${id}`}>
+                    <div className='articles'>{title}</div>
+                  </Link>
                   <td>{userId}</td>
                   <td>{date.getFullYear()}</td>
                 </tr>
@@ -65,6 +65,7 @@ const BoardPage = () => {
             paginate={paginate}
             perPage={perPage}
             totalPosts={data.length}
+            currentPage={currentPage}
           />
         </section>
       </div>
