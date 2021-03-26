@@ -17,6 +17,14 @@
 #### Server
 
 - Node.js v14
-- Sequelize
+- Sequelize(ORM)
 - TypeScript
-- OracleDB
+- MySQL
+
+
+
+![board](https://user-images.githubusercontent.com/16969364/112611218-e4b4f080-8e60-11eb-9b47-11a31f65e934.PNG)
+
+
+
+![캡처](https://user-images.githubusercontent.com/16969364/112611215-e383c380-8e60-11eb-9c0a-842d107b3c4c.PNG)
