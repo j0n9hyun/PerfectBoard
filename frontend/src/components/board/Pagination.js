@@ -5,8 +5,6 @@ const Pagination = ({ paginate, perPage, totalPosts, currentPage }) => {
   for (let i = 1; i <= Math.ceil(totalPosts / perPage); i++) {
     pageNumber.push(i);
   }
-
-  // console.log(pageNumber);
   useEffect(() => {
     let lists = document.querySelectorAll('.pagination');
     for (let i = 0; i < lists.length; ++i) {

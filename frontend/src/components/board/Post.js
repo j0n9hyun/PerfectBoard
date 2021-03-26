@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../../static/scss/board.scss';
 import axios from 'axios';
-
+import Comment from '../comment';
+import '../../static/fontawesome/css/all.css';
 const Post = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -23,16 +24,27 @@ const Post = () => {
       <section className='articleTitle'>
         제목: {title[params.no - 1]} <hr />
         <div className='contents'>
-          <div className='header'>글쓴이: {user[params.no]}</div>
-          {desc[params.no - 1]}
+          <div className='header'>
+            <i className='fas fa-user' /> &nbsp;작성자: {user[params.no]}
+          </div>
+          <div className='contents-view'>{desc[params.no - 1]}</div>
         </div>
       </section>
+      <section className='post-react'>
+        <button className='like-button'>
+          <i className='fas fa-thumbs-up' />
+          <br />
+          좋아요
+        </button>
+
+        <button className='hate-button'>
+          <i className='fas fa-thumbs-down' />
+          <br />
+          싫어요
+        </button>
+      </section>
       <section className='comment-wrapper'>
-        <div className='comment-counter'> 댓글 땡개 </div>
-        <div className='comment'>
-          <div className='comment-header'>닉네임</div>
-          <div className='reply-content'>안녕하세요</div>
-        </div>
+        <Comment />
       </section>
     </div>
   );

@@ -6,9 +6,9 @@ import Pagination from './Pagination';
 
 const BoardPage = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage] = useState(10);
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
@@ -17,12 +17,12 @@ const BoardPage = () => {
 
   useEffect(() => {
     const postApi = async () => {
-      setLoading(true);
+      // setLoading(true);
       await axios
         .get('https://jsonplaceholder.typicode.com/posts')
         .then((res) => setData(res.data))
         .catch((err) => console.log(err));
-      setLoading(false);
+      // setLoading(false);
     };
     postApi();
   }, []);
@@ -48,10 +48,11 @@ const BoardPage = () => {
               {currentPosts.map(({ title, userId, id }) => (
                 <tr key={id}>
                   <td>{id}</td>
-                  {/* <td onClick={onClick}>{title}</td> */}
-                  <Link to={`/post/${id}`}>
-                    <div className='articles'>{title}</div>
-                  </Link>
+                  <td>
+                    <Link to={`/post/${id}`}>
+                      <div className='articles'>{title}</div>
+                    </Link>
+                  </td>
                   <td>{userId}</td>
                   <td>{date.getFullYear()}</td>
                 </tr>
