@@ -11,14 +11,18 @@ const Comment = () => {
   useEffect(() => {
     const commentApi = async () => {
       await axios
-        .get('https://jsonplaceholder.typicode.com/comments')
+        // .get('https://jsonplaceholder.typicode.com/comments')
+        .get('http://localhost:4000/test2')
         .then((res) => setCommentData(res.data))
         .catch((err) => console.log(err));
     };
     commentApi();
   }, []);
-
-  const filtering = commentData.filter((v) => v.postId === parseInt(params.no));
+  // console.log(commentData);
+  // const filtering = commentData.filter((v) => v.postId === parseInt(params.no));
+  const filtering = commentData.filter(
+    (v) => v.post_id === parseInt(params.no)
+  );
   const onChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -45,8 +49,6 @@ const Comment = () => {
     setUserInput('');
   };
 
-  console.log(comments.map((v) => v));
-
   return (
     <div>
       <div className='comment-counter'>
@@ -54,10 +56,10 @@ const Comment = () => {
       </div>
       {commentData.map((comment) => (
         <div key={comment.id}>
-          {comment.postId === parseInt(params.no) ? (
+          {comment.post_id === parseInt(params.no) ? (
             <div className='comment'>
-              <div className='comment-header'>{comment.postId}</div>
-              <div className='reply-content'>{comment.body}</div>
+              <div className='comment-header'>{comment.post_id}</div>
+              <div className='reply-content'>{comment.comment}</div>
             </div>
           ) : null}
         </div>

@@ -9,14 +9,17 @@ const Post = () => {
   useEffect(() => {
     const postApi = async () =>
       await axios
-        .get('https://jsonplaceholder.typicode.com/posts')
+        // .get('https://jsonplaceholder.typicode.com/posts')
+        .get('http://localhost:4000/test')
         .then((res) => setData(res.data))
         .catch((err) => console.log(err));
     postApi();
   }, []);
+
+  console.log(data);
   const params = useParams();
-  const desc = data.map((v) => v.body);
-  const user = data.map((v) => v.userId);
+  const desc = data.map((v) => v.content);
+  const user = data.map((v) => v.name);
   const title = data.map((v) => v.title);
 
   return (
@@ -25,7 +28,7 @@ const Post = () => {
         제목: {title[params.no - 1]} <hr />
         <div className='contents'>
           <div className='header'>
-            <i className='fas fa-user' /> &nbsp;작성자: {user[params.no]}
+            <i className='fas fa-user' /> &nbsp;작성자: {user[params.no - 1]}
           </div>
           <div className='contents-view'>{desc[params.no - 1]}</div>
         </div>

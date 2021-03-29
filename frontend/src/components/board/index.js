@@ -19,10 +19,10 @@ const BoardPage = () => {
     const postApi = async () => {
       // setLoading(true);
       await axios
-        .get('https://jsonplaceholder.typicode.com/posts')
+        // .get('https://jsonplaceholder.typicode.com/posts')
+        .get('http://localhost:4000/test')
         .then((res) => setData(res.data))
         .catch((err) => console.log(err));
-      // setLoading(false);
     };
     postApi();
   }, []);
@@ -45,7 +45,7 @@ const BoardPage = () => {
               </tr>
             </thead>
             <tbody>
-              {currentPosts.map(({ title, userId, id }) => (
+              {currentPosts.map(({ title, name, id, created_at }) => (
                 <tr key={id}>
                   <td>{id}</td>
                   <td>
@@ -53,8 +53,9 @@ const BoardPage = () => {
                       <div className='articles'>{title}</div>
                     </Link>
                   </td>
-                  <td>{userId}</td>
-                  <td>{date.getFullYear()}</td>
+                  <td>{name}</td>
+                  {/* <td>{date.getFullYear()}</td> */}
+                  <td>{created_at.slice(0, 10)}</td>
                 </tr>
               ))}
             </tbody>
