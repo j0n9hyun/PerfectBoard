@@ -1,2 +1,4 @@
 # dependencies
 /node_modules
+/myapp/node_modules
+.env
