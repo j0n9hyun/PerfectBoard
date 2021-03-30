@@ -16,7 +16,7 @@ const Post = () => {
     postApi();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   const params = useParams();
   const desc = data.map((v) => v.content);
   const user = data.map((v) => v.name);

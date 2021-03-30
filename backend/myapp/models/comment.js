@@ -14,7 +14,7 @@ module.exports = class Comment extends Sequelize.Model {
           allowNull: false,
         },
         commenter: {
-          type: Sequelize.INTEGER.UNSIGNED,
+          type: Sequelize.STRING(30),
           allowNull: false,
         },
         created_at: {
@@ -34,5 +34,7 @@ module.exports = class Comment extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Comment.hasMany(db.Reply, { foreignKey: 'test', sourceKey: 'id' });
+  }
 };

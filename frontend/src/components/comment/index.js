@@ -18,8 +18,19 @@ const Comment = () => {
     };
     commentApi();
   }, []);
-  // console.log(commentData);
-  // const filtering = commentData.filter((v) => v.postId === parseInt(params.no));
+
+  const reply = () => {
+    axios
+      .post('http://localhost:4000/test2', {
+        post_id: parseInt(params.no),
+        comment: userInput,
+        commenter: parseInt(params.no - 1),
+        created_at: new Date(),
+      })
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  };
+
   const filtering = commentData.filter(
     (v) => v.post_id === parseInt(params.no)
   );
@@ -46,7 +57,13 @@ const Comment = () => {
   };
   const handleComment = () => {
     setComments(comments.concat(userInput));
+    reply();
     setUserInput('');
+  };
+
+  const RemoveClass = () => {
+    const test = document.querySelector('.comment-header');
+    test.classList.remove('comment-header');
   };
 
   return (
@@ -58,15 +75,20 @@ const Comment = () => {
         <div key={comment.id}>
           {comment.post_id === parseInt(params.no) ? (
             <div className='comment'>
-              <div className='comment-header'>{comment.post_id}</div>
+              <div className='comment-header'>
+                {comment.commenter} <i className='fas fa-reply' />
+              </div>
               <div className='reply-content'>{comment.comment}</div>
             </div>
           ) : null}
         </div>
       ))}
+
       {comments.map((text, idx) => (
         <div className='comment'>
-          <div className='comment-header'>{idx + 999}번 실험체</div>
+          <div className='comment-header'>
+            {params.no - 1} <i className='fas fa-reply' />
+          </div>
           <div className='reply-content'>{text}</div>
         </div>
       ))}
