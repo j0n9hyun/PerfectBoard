@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { User, Comment } = require('../models');
+const { User, Comment, Reply } = require('../models');
 
 router.get('/', (req, res) => {
   res.send('test API');
@@ -12,7 +12,7 @@ router.get('/test', async (req, res) => {
 });
 
 router.get('/test2', async (req, res) => {
-  const comments = await Comment.findAll();
+  const comments = await Comment.findAll({ include: Reply });
   res.send(comments);
 });
 

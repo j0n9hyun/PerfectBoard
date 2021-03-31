@@ -16,11 +16,10 @@ const Post = () => {
     postApi();
   }, []);
 
-  // console.log(data);
-  const params = useParams();
-  const desc = data.map((v) => v.content);
-  const user = data.map((v) => v.name);
-  const title = data.map((v) => v.title);
+  const params: any = useParams();
+  const desc: Array<number> = data.map((v: any) => v.content);
+  const user: Array<string> = data.map((v: any) => v.name);
+  const title: Array<string> = data.map((v: any) => v.title);
 
   return (
     <div className='boardcontainer'>

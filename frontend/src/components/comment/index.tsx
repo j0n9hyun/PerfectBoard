@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 const Comment = () => {
   const [commentData, setCommentData] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const [comments, setComments] = useState([]);
-  const params = useParams();
-  const ddd = useRef();
+  const [comments, setComments] = useState<any>([]);
+  const params = useParams<any>();
+  const ddd = useRef<any>();
 
   useEffect(() => {
     const commentApi = async () => {
@@ -24,7 +24,7 @@ const Comment = () => {
       .post('http://localhost:4000/test2', {
         post_id: parseInt(params.no),
         comment: userInput,
-        commenter: parseInt(params.no - 1),
+        commenter: params.no - 1,
         created_at: new Date(),
       })
       .then((res) => res.data)
@@ -32,13 +32,13 @@ const Comment = () => {
   };
 
   const filtering = commentData.filter(
-    (v) => v.post_id === parseInt(params.no)
+    (v: any) => v.post_id === parseInt(params.no)
   );
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>)=> {
     setUserInput(e.target.value);
   };
 
-  const onKeyPress = (e) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       if (!userInput) {
         e.preventDefault();
@@ -48,7 +48,7 @@ const Comment = () => {
     }
   };
 
-  const onClick = (e) => {
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!userInput) {
       e.preventDefault();
     } else {
@@ -61,17 +61,12 @@ const Comment = () => {
     setUserInput('');
   };
 
-  const RemoveClass = () => {
-    const test = document.querySelector('.comment-header');
-    test.classList.remove('comment-header');
-  };
-
   return (
     <div>
       <div className='comment-counter'>
         <i className='far fa-comment-dots' /> 댓글 {filtering.length}개
       </div>
-      {commentData.map((comment) => (
+      {commentData.map((comment: any) => (
         <div key={comment.id}>
           {comment.post_id === parseInt(params.no) ? (
             <div className='comment'>
@@ -79,12 +74,39 @@ const Comment = () => {
                 {comment.commenter} <i className='fas fa-reply' />
               </div>
               <div className='reply-content'>{comment.comment}</div>
+              <div>
+              </div>
             </div>
           ) : null}
+          {/* {comment.commenter_id === parseInt(params.no) ? (
+            <div className='comment reply'>
+                          <div className='comment-header'>
+                          답글러 <i className='fas fa-reply' />
+                        </div>
+                <div className='reply-content'>
+                  {comment.Replies.map((v: any) => `└ reply: ${v.reply} `)}
+                </div>
+                </div>
+
+          ): null} */}
+
+          {comment.Replies.map((v: any) => (
+            <div> 
+            {comment.commenter_id === parseInt(params.no) ? (
+              <div className='comment reply'>
+                <div className='comment-header'> 답글러 <i className='fas fa-reply'/></div>
+                <div className='reply-content'>
+                  {`└ reply: ${v.reply}`}
+                </div>
+
+              </div>
+            ): null}
+            </div>
+          ))}
         </div>
       ))}
 
-      {comments.map((text, idx) => (
+      {comments.map((text: string) => (
         <div className='comment'>
           <div className='comment-header'>
             {params.no - 1} <i className='fas fa-reply' />

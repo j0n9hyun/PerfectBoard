@@ -12,12 +12,10 @@ const BoardPage = () => {
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-  const date = new Date();
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     const postApi = async () => {
-      // setLoading(true);
       await axios
         // .get('https://jsonplaceholder.typicode.com/posts')
         .get('http://localhost:4000/test')
@@ -45,7 +43,7 @@ const BoardPage = () => {
               </tr>
             </thead>
             <tbody>
-              {currentPosts.map(({ title, name, id, created_at }) => (
+              {currentPosts.map(({ title, name, id, created_at }: any) => (
                 <tr key={id}>
                   <td>{id}</td>
                   <td>

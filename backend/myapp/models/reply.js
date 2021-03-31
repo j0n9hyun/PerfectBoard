@@ -9,6 +9,10 @@ module.exports = class Reply extends Sequelize.Model {
           type: Sequelize.INTEGER.UNSIGNED,
           allowNull: false,
         },
+        reply: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
         // test: {
         //   type: Sequelize.INTEGER.UNSIGNED,
         //   allowNull: false,
@@ -28,7 +32,7 @@ module.exports = class Reply extends Sequelize.Model {
   }
   static associate(db) {
     db.Comment.belongsTo(db.Comment, {
-      foreignKey: 'test',
+      foreignKey: 'commenter_id',
       targetKey: 'id',
     });
   }

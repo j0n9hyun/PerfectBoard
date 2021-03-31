@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 
-const Pagination = ({ paginate, perPage, totalPosts, currentPage }) => {
-  const pageNumber = [];
+interface Props {
+  paginate(pageNum: number): any,
+  perPage: number,
+  totalPosts: number,
+  currentPage: number,
+}
+
+const Pagination = ({ paginate, perPage, totalPosts, currentPage }: Props) => {
+  const pageNumber:Array<number> = [];
   for (let i = 1; i <= Math.ceil(totalPosts / perPage); i++) {
     pageNumber.push(i);
   }

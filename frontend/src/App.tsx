@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import BoardPage from './components/board';
+import BoardPage from './components/board/index';
 import Post from './components/board/Post';
 
 const App = () => {
