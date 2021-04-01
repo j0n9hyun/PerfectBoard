@@ -25,6 +25,13 @@ const BoardPage = () => {
     postApi();
   }, []);
 
+  interface postProps {
+    title: string,
+    name: string,
+    id: number,
+    created_at: string;
+  }
+
   return (
     <>
       <div className='boardcontainer'>
@@ -43,8 +50,8 @@ const BoardPage = () => {
               </tr>
             </thead>
             <tbody>
-              {currentPosts.map(({ title, name, id, created_at }: any) => (
-                <tr key={id}>
+              {currentPosts.map(({ title, name, id, created_at }: postProps) => (
+                <tr key={id-1}>
                   <td>{id}</td>
                   <td>
                     <Link to={`/post/${id}`}>
@@ -52,7 +59,6 @@ const BoardPage = () => {
                     </Link>
                   </td>
                   <td>{name}</td>
-                  {/* <td>{date.getFullYear()}</td> */}
                   <td>{created_at.slice(0, 10)}</td>
                 </tr>
               ))}

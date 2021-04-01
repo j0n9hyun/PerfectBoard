@@ -15,21 +15,26 @@ const Post = () => {
         .catch((err) => console.log(err));
     postApi();
   }, []);
+  
+  interface Props {
+    name: string,
+    title: string,
+    content: string,
+  }
 
   const params: any = useParams();
-  const desc: Array<number> = data.map((v: any) => v.content);
-  const user: Array<string> = data.map((v: any) => v.name);
-  const title: Array<string> = data.map((v: any) => v.title);
-
+  const desc: Array<string> = data.map((v: Props) => v.content);
+  const user: Array<string> = data.map((v: Props) => v.name);
+  const title: Array<string> = data.map((v: Props) => v.title);
   return (
     <div className='boardcontainer'>
       <section className='articleTitle'>
-        제목: {title[params.no - 1]} <hr />
+        제목: {title[params.no-1]} <hr />
         <div className='contents'>
           <div className='header'>
             <i className='fas fa-user' /> &nbsp;작성자: {user[params.no - 1]}
           </div>
-          <div className='contents-view'>{desc[params.no - 1]}</div>
+          <div className='contents-view'>{desc[params.no-1]}</div>
         </div>
       </section>
       <section className='post-react'>

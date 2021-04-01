@@ -19,7 +19,7 @@ const Comment = () => {
     commentApi();
   }, []);
 
-  const reply = () => {
+  function reply() {
     axios
       .post('http://localhost:4000/test2', {
         post_id: parseInt(params.no),
@@ -34,11 +34,14 @@ const Comment = () => {
   const filtering = commentData.filter(
     (v: any) => v.post_id === parseInt(params.no)
   );
-  const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>)=> {
+  const filtering2: any = commentData.map((v: any) => v.Replies.filter((a: any) => a.commenter_id === parseInt(params.no)));
+
+  // console.log(Object(filtering2[params.no-1]).length); 
+  function onChange (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
     setUserInput(e.target.value);
   };
 
-  const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  function onKeyPress (e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === 'Enter') {
       if (!userInput) {
         e.preventDefault();
@@ -48,14 +51,14 @@ const Comment = () => {
     }
   };
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  function onClick (e: React.MouseEvent<HTMLButtonElement>) {
     if (!userInput) {
       e.preventDefault();
     } else {
       handleComment();
     }
   };
-  const handleComment = () => {
+  function handleComment() {
     setComments(comments.concat(userInput));
     reply();
     setUserInput('');
@@ -64,9 +67,9 @@ const Comment = () => {
   return (
     <div>
       <div className='comment-counter'>
-        <i className='far fa-comment-dots' /> 댓글 {filtering.length}개
+        <i className='far fa-comment-dots' /> 댓글 {filtering.length === 0 ? 0 : filtering.length + Object(filtering2[params.no-1]).length}개 
       </div>
-      {commentData.map((comment: any) => (
+      {commentData.map((comment: any): any => (
         <div key={comment.id}>
           {comment.post_id === parseInt(params.no) ? (
             <div className='comment'>
@@ -78,17 +81,7 @@ const Comment = () => {
               </div>
             </div>
           ) : null}
-          {/* {comment.commenter_id === parseInt(params.no) ? (
-            <div className='comment reply'>
-                          <div className='comment-header'>
-                          답글러 <i className='fas fa-reply' />
-                        </div>
-                <div className='reply-content'>
-                  {comment.Replies.map((v: any) => `└ reply: ${v.reply} `)}
-                </div>
-                </div>
 
-          ): null} */}
 
           {comment.Replies.map((v: any) => (
             <div> 
@@ -96,7 +89,7 @@ const Comment = () => {
               <div className='comment reply'>
                 <div className='comment-header'> 답글러 <i className='fas fa-reply'/></div>
                 <div className='reply-content'>
-                  {`└ reply: ${v.reply}`}
+                  {`${v.reply}`}
                 </div>
 
               </div>

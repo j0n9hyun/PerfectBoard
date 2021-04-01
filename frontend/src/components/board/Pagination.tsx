@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 
 interface Props {
-  paginate(pageNum: number): any,
+  paginate(pageNum: number): void,
   perPage: number,
   totalPosts: number,
   currentPage: number,
 }
 
 const Pagination = ({ paginate, perPage, totalPosts, currentPage }: Props) => {
-  const pageNumber:Array<number> = [];
-  for (let i = 1; i <= Math.ceil(totalPosts / perPage); i++) {
+  const pageNumber: Array<number> = [];
+  for (let i = 1; i <= Math.ceil (totalPosts / perPage); i++) {
     pageNumber.push(i);
   }
   useEffect(() => {
