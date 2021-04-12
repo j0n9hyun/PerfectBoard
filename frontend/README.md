@@ -5,5 +5,5 @@
 - [x] Fake REST API
 - [x] Pagination
 - [x] Comment
-- [ ] Nested Reply
-- [ ] CSS Detailed Styling
+- [x] Nested Reply
+- [x] CSS Detailed Styling

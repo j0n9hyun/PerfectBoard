@@ -10,6 +10,7 @@
 
 - React v17
 - React Router v5
+- TypeScript
 - Axios
 - Scss
 
@@ -18,7 +19,6 @@
 
 - Node.js v14
 - Sequelize(ORM)
-- TypeScript
 - MySQL
 
 

@@ -31,12 +31,27 @@ const Comment = () => {
       .catch((err) => console.log(err));
   };
 
+  interface CommentProps {
+    id: number,
+    Replies: never[],
+    post_id: number,
+    commenter: number,
+    commenter_id: number,
+    comment: string,
+  }
+
+  interface ReplyProps {
+    commenter_id: number,
+    reply: string,
+  }
+
+
   const filtering = commentData.filter(
     (v: any) => v.post_id === parseInt(params.no)
   );
-  const filtering2: any = commentData.map((v: any) => v.Replies.filter((a: any) => a.commenter_id === parseInt(params.no)));
 
-  // console.log(Object(filtering2[params.no-1]).length); 
+  const filtering2 = commentData.map(({Replies}: CommentProps) => Replies.filter(({commenter_id} : ReplyProps ) => commenter_id === parseInt(params.no)));
+
   function onChange (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
     setUserInput(e.target.value);
   };
@@ -58,6 +73,7 @@ const Comment = () => {
       handleComment();
     }
   };
+
   function handleComment() {
     setComments(comments.concat(userInput));
     reply();
@@ -69,7 +85,7 @@ const Comment = () => {
       <div className='comment-counter'>
         <i className='far fa-comment-dots' /> 댓글 {filtering.length === 0 ? 0 : filtering.length + Object(filtering2[params.no-1]).length}개 
       </div>
-      {commentData.map((comment: any): any => (
+      {commentData.map((comment: CommentProps) => (
         <div key={comment.id}>
           {comment.post_id === parseInt(params.no) ? (
             <div className='comment'>
@@ -82,8 +98,7 @@ const Comment = () => {
             </div>
           ) : null}
 
-
-          {comment.Replies.map((v: any) => (
+          {comment.Replies.map((v: ReplyProps) => (
             <div> 
             {comment.commenter_id === parseInt(params.no) ? (
               <div className='comment reply'>
@@ -91,7 +106,6 @@ const Comment = () => {
                 <div className='reply-content'>
                   {`${v.reply}`}
                 </div>
-
               </div>
             ): null}
             </div>
